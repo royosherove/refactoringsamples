@@ -34,6 +34,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,9 +52,16 @@
     <Compile Include="1.StringCalcAfterSRP\StringCalculatorSRPAfter.cs" />
     <Compile Include="1.StringCalcAfterSRP\Tokenizer.cs" />
     <Compile Include="2.StringCalcAfterOCPwithDIP\ExceptionMessageMaker.cs" />
+    <Compile Include="2.StringCalcAfterOCPwithDIP\Interfaces\INegativeChecker.cs" />
+    <Compile Include="2.StringCalcAfterOCPwithDIP\Interfaces\INumberParser.cs" />
+    <Compile Include="2.StringCalcAfterOCPwithDIP\Interfaces\ITokenizer.cs" />
     <Compile Include="2.StringCalcAfterOCPwithDIP\NegativeChecker.cs" />
     <Compile Include="2.StringCalcAfterOCPwithDIP\NumberParser.cs" />
     <Compile Include="2.StringCalcAfterOCPwithDIP\StringCalculator2.cs" />
+    <Compile Include="ContainerExample.cs" />
+    <Compile Include="Functions2.cs" />
+    <Compile Include="Functions.cs" />
+    <Compile Include="StringCalcTests.cs" />
     <Compile Include="StringCalculatorSrpBefore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="2.StringCalcAfterOCPwithDIP\Tokenizer.cs" />

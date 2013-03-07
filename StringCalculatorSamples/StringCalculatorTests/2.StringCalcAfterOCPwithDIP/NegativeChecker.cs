@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace StringCalculatorTests
 {
-    public class NegativeChecker2
+    public class NegativeChecker2 : INegativeChecker
     {
         public void Check(IEnumerable<int> numbers)
         {

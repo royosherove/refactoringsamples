@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace StringCalculatorTests
 {
-    public class NumberParser2
+    public class NumberParser2 : INumberParser
     {
         public List<int> Parse(IEnumerable<string> tokens)
         {

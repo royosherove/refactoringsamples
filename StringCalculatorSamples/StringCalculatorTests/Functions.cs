@@ -25,8 +25,8 @@ namespace StringCalculatorApp
                 // Get the index where the custom delimiter ends
                 int endIndex = customDelimiterNumbers.IndexOf(CustomDelimiterEnd);
 
-                // Found end of custom delimiter 
-                if (endIndex > -1)
+                // Found end of custom delimiter  
+                if(endIndex > -1)
                 {
                     char[] customDelimiter = customDelimiterNumbers.Take(endIndex).ToArray();
                     return customDelimiterNumbers.Substring(endIndex + 1).Split(customDelimiter).Calc();
