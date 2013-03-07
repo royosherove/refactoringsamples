@@ -43,13 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StringCalcAfterSrp\ExceptionMessageMaker.cs" />
-    <Compile Include="StringCalcAfterSrp\NegativeChecker.cs" />
-    <Compile Include="StringCalcAfterSrp\NumberParser.cs" />
-    <Compile Include="StringCalcAfterSrp\StringCalculatorSRPAfter.cs" />
+    <Compile Include="1.StringCalcAfterSRP\ExceptionMessageMaker.cs" />
+    <Compile Include="1.StringCalcAfterSRP\NegativeChecker.cs" />
+    <Compile Include="1.StringCalcAfterSRP\NumberParser.cs" />
+    <Compile Include="1.StringCalcAfterSRP\StringCalculatorSRPAfter.cs" />
+    <Compile Include="1.StringCalcAfterSRP\Tokenizer.cs" />
+    <Compile Include="2.StringCalcAfterOCPwithDIP\ExceptionMessageMaker.cs" />
+    <Compile Include="2.StringCalcAfterOCPwithDIP\NegativeChecker.cs" />
+    <Compile Include="2.StringCalcAfterOCPwithDIP\NumberParser.cs" />
+    <Compile Include="2.StringCalcAfterOCPwithDIP\StringCalculator2.cs" />
     <Compile Include="StringCalculatorSrpBefore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringCalcAfterSrp\Tokenizer.cs" />
+    <Compile Include="2.StringCalcAfterOCPwithDIP\Tokenizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
