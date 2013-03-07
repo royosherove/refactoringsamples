@@ -61,6 +61,7 @@
     <Compile Include="ContainerExample.cs" />
     <Compile Include="Functions2.cs" />
     <Compile Include="Functions.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="StringCalcTests.cs" />
     <Compile Include="StringCalculatorSrpBefore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

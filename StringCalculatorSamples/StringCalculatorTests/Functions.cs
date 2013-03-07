@@ -36,7 +36,6 @@ namespace StringCalculatorApp
 
             return numbers.Split(Seperators).Calc();
         }
-
         private static bool HasCustomDelimiter(string numbers)
         {
             return numbers.StartsWith(CustomDelimiterStart);
