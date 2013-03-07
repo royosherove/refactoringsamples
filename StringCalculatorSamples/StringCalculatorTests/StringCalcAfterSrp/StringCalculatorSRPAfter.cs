@@ -3,40 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
-namespace StringCalculatorTests
+namespace StringCalculatorTests.StringCalcAfterSrp
 {
     public class StringCalculatorSrpAfter
     {
-        private NegativeChecker _validator;
-        private NumberParser _parser;
-        private Tokenizer _tokenizer;
-
-        public StringCalculatorSrpAfter(NegativeChecker validator, NumberParser parser, Tokenizer tokenizer)
-        {
-            _validator = validator;
-            _parser = parser;
-            _tokenizer = tokenizer;
-        }
-
         public int Add(string input)
         {
             if (string.IsNullOrEmpty(input))
                 return 0;
 
-            IEnumerable<string> tokens = _tokenizer.Tokenize(input);
-            IEnumerable<int> numbers = _parser.Parse(tokens);
-
-            _validator.Check(numbers);
+            IEnumerable<string> tokens = Tokenize(input);
+            IEnumerable<int> numbers = ConvertToNumbers(tokens);
+            CheckForProblematicNumbers(numbers);
 
             return numbers.Sum();
         }
+
+        private  IEnumerable<string> Tokenize(string input)
+        {
+            Tokenizer tok = new Tokenizer();
+            return tok.Tokenize(input);
+        }
+
+        private List<int> ConvertToNumbers(IEnumerable<string> tokens)
+        {
+            NumberParser parser = new NumberParser();
+            return parser.Parse(tokens);
+        }
+
+        private void CheckForProblematicNumbers(IEnumerable<int> numbers)
+        {
+            NegativeChecker check = new NegativeChecker();
+            check.Check(numbers);
+        }
+
+
     }
 
 
     [TestFixture]
     public class StringCalculatorTestAfter
     {
-        private StringCalculatorSrpAfter calculator = new StringCalculatorSrpAfter(new NegativeChecker(), new NumberParser(), new Tokenizer());
+        private StringCalculatorSrpAfter calculator = new StringCalculatorSrpAfter();
 
         [Test]
         public void Add_EmptyString_ReturnsZero()

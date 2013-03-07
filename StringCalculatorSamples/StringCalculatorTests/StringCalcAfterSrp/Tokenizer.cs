@@ -2,7 +2,7 @@
 
 namespace StringCalculatorTests
 {
-    internal class Tokenizer
+    public class Tokenizer
     {
         private const char DefaultDelimiter = ',';
         public IEnumerable<string> Tokenize(string input)
