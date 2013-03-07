@@ -2,10 +2,10 @@
 
 namespace GildedRose.Console
 {
-    class Program
+    public class Program
     {
         IList<Item> Items;
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             System.Console.WriteLine("OMGHAI!");
 
@@ -53,7 +53,6 @@ namespace GildedRose.Console
                 System.Console.WriteLine("");
                 app.UpdateQuality();
             }
-            System.Console.ReadKey();
 
         }
 
