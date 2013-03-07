@@ -5,81 +5,38 @@ using NUnit.Framework;
 
 namespace StringCalculatorTests
 {
-    public class StringCalculatorSrpBefore
+    public class StringCalculatorSrpAfter
     {
-        private const char DefaultDelimiter = ',';
+        private NegativeChecker _validator;
+        private NumberParser _parser;
+        private Tokenizer _tokenizer;
+
+        public StringCalculatorSrpAfter(NegativeChecker validator, NumberParser parser, Tokenizer tokenizer)
+        {
+            _validator = validator;
+            _parser = parser;
+            _tokenizer = tokenizer;
+        }
 
         public int Add(string input)
         {
             if (string.IsNullOrEmpty(input))
                 return 0;
 
-            IEnumerable<string> tokens = Tokenize(input);
-            IEnumerable<int> numbers = tokens.Select(ConvertToNumber).ToList();
+            IEnumerable<string> tokens = _tokenizer.Tokenize(input);
+            IEnumerable<int> numbers = _parser.Parse(tokens);
 
-            CheckForNegativeNumbers(numbers);
+            _validator.Check(numbers);
 
             return numbers.Sum();
-        }
-
-        private static void CheckForNegativeNumbers(IEnumerable<int> numbers)
-        {
-            List<int> negativeNumbers = numbers.Where(number => number < 0).ToList();
-
-            if (negativeNumbers.Count > 0)
-                throw new ArgumentException("Negatives not allowed: " + FormatNegativeNumbers(negativeNumbers));
-        }
-
-        private static string FormatNegativeNumbers(IEnumerable<int> negativeNumbers)
-        {
-            return string.Join(" ", negativeNumbers);
-        }
-
-        private static IEnumerable<string> Tokenize(string input)
-        {
-            char delimiter = DefaultDelimiter;
-
-            if (CustomDelimiterSpecified(input))
-            {
-                delimiter = ParseCustomDelimiter(ref input);
-            }
-            else
-            {
-                input = ReplaceAlternativeDelimitersWithCommas(input);
-            }
-
-            return input.Split(delimiter);
-        }
-
-        private static char ParseCustomDelimiter(ref string input)
-        {
-            char customDelimiter = input[2];
-            input = input.Substring(4);
-            return customDelimiter;
-        }
-
-        private static bool CustomDelimiterSpecified(string input)
-        {
-            return input.StartsWith("//");
-        }
-
-        private static string ReplaceAlternativeDelimitersWithCommas(string input)
-        {
-            return input.Replace("\n", ",");
-        }
-
-        private static int ConvertToNumber(string input)
-        {
-            return int.Parse(input);
         }
     }
 
 
-
     [TestFixture]
-    public class StringCalculatorTest
+    public class StringCalculatorTestAfter
     {
-        private StringCalculatorSrpBefore calculator = new StringCalculatorSrpBefore();
+        private StringCalculatorSrpAfter calculator = new StringCalculatorSrpAfter(new NegativeChecker(), new NumberParser(), new Tokenizer());
 
         [Test]
         public void Add_EmptyString_ReturnsZero()
