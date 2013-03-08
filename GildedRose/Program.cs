@@ -58,18 +58,12 @@ namespace GildedRose.Console
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < Items.Count; i++)
+            foreach (Item item in Items)
             {
-                Item item = Items[i];
                 QualityStrategyFinder finder = new QualityStrategyFinder();
                 IQualityStrategy strategy = finder.FindStrategy(item);
-                if (strategy != null)
-                {
-                    strategy.UpdateQuality(item);
-                }
-
-           }
+                strategy.UpdateQuality(item);
+            }
         }
-
     }
 }
