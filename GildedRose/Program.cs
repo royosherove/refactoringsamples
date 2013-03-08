@@ -7,15 +7,14 @@ namespace GildedRose.Console
         public static void Main(string[] args)
         {
             System.Console.WriteLine("OMGHAI!");
-
-            var app = new Program(new DayReporter(),GetItems())
+            var app = new Program(new DayReporter(), GetItems());
             app.Run();
         }
 
         public IList<Item> Items;
-        public DayReporter Reporter { get; set; }
+        public IDayReporter Reporter { get; set; }
 
-        private Program(DayReporter dayReporter, List<Item> items)
+        private Program(IDayReporter dayReporter, List<Item> items)
         {
             Reporter = dayReporter;
             Items = items;

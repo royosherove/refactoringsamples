@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AgedBrieStrategy.cs" />
     <Compile Include="DayReporter.cs" />
+    <Compile Include="IDayReporter.cs" />
     <Compile Include="IQualityStrategy.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Program.cs" />

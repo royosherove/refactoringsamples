@@ -1,6 +1,6 @@
 ﻿namespace GildedRose.Console
 {
-    public class DayReporter
+    public class DayReporter : IDayReporter
     {
         public void Report(int dayNumber, Program app)
         {
