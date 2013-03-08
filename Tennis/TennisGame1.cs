@@ -5,9 +5,16 @@ namespace Tennis
 {
     class TennisGame1 : TennisGame
     {
-        private int m_score1 = 0;
-        private int m_score2 = 0;
+        public int m_score1 = 0;
+        public int m_score2 = 0;
+        private string player1Name;
+        private string player2Name;
 
+        public TennisGame1(string player1Name, string player2Name)
+        {
+            this.player1Name = player1Name;
+            this.player2Name = player2Name;
+        }
 
         public void WonPoint(string playerName)
         {
@@ -21,30 +28,12 @@ namespace Tennis
         {
             String score = "";
             int tempScore = 0;
-            bool isTie = m_score1 == m_score2;
-            if (isTie)
+            SameScoreStrategy s = new SameScoreStrategy();
+            if (s.AppliesTo(this))
             {
-                switch (m_score1)
-                {
-                    case 0:
-                        score = "Love-All";
-                        break;
-                    case 1:
-                        score = "Fifteen-All";
-                        break;
-                    case 2:
-                        score = "Thirty-All";
-                        break;
-                    case 3:
-                        score = "Forty-All";
-                        break;
-                    default:
-                        score = "Deuce";
-                        break;
-
-                }
+                return s.CalculateScore(this);
             }
-            else if (m_score1 >= 4 || m_score2 >= 4)
+            if (m_score1 >= 4 || m_score2 >= 4)
             {
                 int minusResult = m_score1 - m_score2;
                 if (minusResult == 1) score = "Advantage player1";
@@ -78,6 +67,5 @@ namespace Tennis
             return score;
         }
     }
-
 }
 
