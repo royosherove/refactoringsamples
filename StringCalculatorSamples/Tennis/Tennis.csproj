@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{91DD0A0B-1F86-4BB1-990A-0D603E4E7653}</ProjectGuid>
+    <ProjectGuid>dc2a9b0b-6487-4bea-9c54-709b5dad6ff1</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StringCalculatorTests</RootNamespace>
-    <AssemblyName>StringCalculatorTests</AssemblyName>
+    <RootNamespace>Tennis</RootNamespace>
+    <AssemblyName>Tennis</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,12 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap">
-      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,29 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="1.StringCalcAfterSRP\ExceptionMessageMaker.cs" />
-    <Compile Include="1.StringCalcAfterSRP\NegativeChecker.cs" />
-    <Compile Include="1.StringCalcAfterSRP\NumberParser.cs" />
-    <Compile Include="1.StringCalcAfterSRP\StringCalculatorSRPAfter.cs" />
-    <Compile Include="1.StringCalcAfterSRP\Tokenizer.cs" />
-    <Compile Include="2.StringCalcAfterOCPwithDIP\ExceptionMessageMaker.cs" />
-    <Compile Include="2.StringCalcAfterOCPwithDIP\Interfaces\INegativeChecker.cs" />
-    <Compile Include="2.StringCalcAfterOCPwithDIP\Interfaces\INumberParser.cs" />
-    <Compile Include="2.StringCalcAfterOCPwithDIP\Interfaces\ITokenizer.cs" />
-    <Compile Include="2.StringCalcAfterOCPwithDIP\NegativeChecker.cs" />
-    <Compile Include="2.StringCalcAfterOCPwithDIP\NumberParser.cs" />
-    <Compile Include="2.StringCalcAfterOCPwithDIP\StringCalculator2.cs" />
-    <Compile Include="ContainerExample.cs" />
-    <Compile Include="Functions2.cs" />
-    <Compile Include="Functions.cs" />
-    <Compile Include="MainTests.cs" />
-    <Compile Include="StringCalcTests.cs" />
-    <Compile Include="StringCalculatorSrpBefore.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="2.StringCalcAfterOCPwithDIP\Tokenizer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
