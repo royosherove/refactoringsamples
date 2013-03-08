@@ -63,82 +63,13 @@ namespace GildedRose.Console
                 Item item = Items[i];
                 QualityStrategyFinder finder = new QualityStrategyFinder();
                 IQualityStrategy strategy = finder.FindStrategy(item);
-                if (strategy!=null)
+                if (strategy != null)
                 {
                     strategy.UpdateQuality(item);
-                    continue;
                 }
 
-                bool notBrie = item.Name != "Aged Brie";
-                bool notBackStage = item.Name != "Backstage passes to a TAFKAL80ETC concert";
-                bool notRegnaros = item.Name != "Sulfuras, Hand of Ragnaros";
-                bool isStandardItem = notBrie && notBackStage;
-                if (isStandardItem && notRegnaros)
-                {
-                        DecraseQuality(item);
-                }
-                else
-                {
-                    IncreaseQualityIfRelevant(item);
-                }
-
-                if (notRegnaros)
-                {
-                    item.SellIn = item.SellIn - 1;
-                }
-
-                if (item.SellIn < 0)
-                {
-                    if (notRegnaros)
-                    {
-                        DecraseQuality(item);
-                    }
-                }
-            }
+           }
         }
 
-        private static void HandleBackstage(Item item)
-        {
-            SetNoQuality(item);
-        }
-
-        private static void HandleBrie(Item item)
-        {
-            IncreaseQualityIfRelevant(item);
-        }
-
-        private static void SetNoQuality(Item item)
-        {
-            item.Quality = item.Quality - item.Quality;
-        }
-
-        private static void HandleBackstagePasses(Item item)
-        {
-            if (item.SellIn < 11)
-            {
-                IncreaseQualityIfRelevant(item);
-            }
-
-            if (item.SellIn < 6)
-            {
-                IncreaseQualityIfRelevant(item);
-            }
-        }
-
-        private static void IncreaseQualityIfRelevant(Item item)
-        {
-            if (item.Quality < 50)
-            {
-                item.Quality = item.Quality + 1;
-            }
-        }
-
-        private static void DecraseQuality(Item item)
-        {
-            if (item.Quality > 0)
-            {
-                item.Quality = item.Quality - 1;
-            }
-        }
     }
 }

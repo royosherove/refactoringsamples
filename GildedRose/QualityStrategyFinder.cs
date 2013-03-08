@@ -9,7 +9,9 @@ namespace GildedRose.Console
             List<IQualityStrategy> strategies = new List<IQualityStrategy>()
                                                     {
                                                         new AgedBrieStrategy(),
-                                                        new BackStagePassesStrategy()
+                                                        new BackStagePassesStrategy(),
+                                                        new SulfurasStrategy(),
+                                                        new DefaultStrategy()
                                                     };
             foreach (var strategy in strategies)
             {
@@ -18,7 +20,46 @@ namespace GildedRose.Console
                     return strategy;
                 }
             }
-            return null;
+            return new DefaultStrategy();
+        }
+    }
+
+    public class DefaultStrategy : IQualityStrategy
+    {
+        public bool IsRelevantTo(Item item)
+        {
+            return true;
+        }
+
+        public void UpdateQuality(Item item)
+        {
+            item.SellIn--;
+
+            DecreaseQuality(item);
+            if (item.SellIn < 0)
+            {
+                DecreaseQuality(item);
+            } 
+        }
+
+        private static void DecreaseQuality(Item item)
+        {
+            if (item.Quality > 0)
+            {
+                item.Quality--;
+            }
+        }
+    }
+
+    public class SulfurasStrategy : IQualityStrategy
+    {
+        public bool IsRelevantTo(Item item)
+        {
+            return item.Name.Contains("Sulfuras");
+        }
+
+        public void UpdateQuality(Item item)
+        {
         }
     }
 }
