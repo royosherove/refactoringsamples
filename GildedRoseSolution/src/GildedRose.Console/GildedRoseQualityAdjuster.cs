@@ -25,7 +25,7 @@ namespace GildedRose.Console
 
                 if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    var adjustmentStrategy = new QualityAdjustmentStrategy();
+                    var adjustmentStrategy = new AgedBrieQualityStrategy();
                     adjustmentStrategy.Update(Items[i]);
                     //if (Items[i].Quality > 0)
                     //{

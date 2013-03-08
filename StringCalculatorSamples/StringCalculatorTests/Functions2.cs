@@ -58,12 +58,9 @@ namespace Mike.Katas
 
             if (negativeNumbers.Length > 0)
             {
-
-                string MessageNumbers = string.Join(", ", negativeNumbers);
-                string ExceptionMessage = string.Format("negatives not allowed [{0}]", MessageNumbers);
+                var ExceptionMessage = FormatMessage(negativeNumbers);
 
                 throw new InvalidOperationException(ExceptionMessage);
-
             }
 
 
@@ -72,6 +69,21 @@ namespace Mike.Katas
 
         }
 
+        private static string FormatMessage(string[] negativeNumbers)
+        {
+            MessageFormatter mf = new MessageFormatter();
+            return mf.Format(negativeNumbers);
+        }
+    }
+
+    internal class MessageFormatter
+    {
+        public string Format(string[] strings)
+        {
+            string MessageNumbers = string.Join(", ", strings);
+            string ExceptionMessage = string.Format("negatives not allowed [{0}]", MessageNumbers);
+            return ExceptionMessage;
+        }
     }
 
     [TestFixture]

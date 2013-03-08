@@ -6,12 +6,11 @@ namespace GildedRose.Console
     {
         public void Update(Item item)
         {
-            throw new NotImplementedException();
         }
 
         public bool CanBeUsed(Item item)
         {
-            throw new NotImplementedException();
+            return item.Name.Contains("Conjured");
         }
     }
 }

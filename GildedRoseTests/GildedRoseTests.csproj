@@ -47,7 +47,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GildedRose\GildedRose.csproj">
+    <ProjectReference Include="..\GildedRose\GildedRose.csproj">
       <Project>{A4C125A0-7E0D-4F72-A125-6407D7938F95}</Project>
       <Name>GildedRose</Name>
     </ProjectReference>

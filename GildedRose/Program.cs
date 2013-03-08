@@ -56,91 +56,130 @@ namespace GildedRose.Console
 
         }
 
+        class AgedBrieStrategy
+        {
+            public bool IsRelevantTo(Item item)
+            {
+                return item.Name.Contains("Brie");
+            }
+
+            public void UpdateQuality(Item item)
+            {
+                if (item.SellIn>0)
+                {
+                    IncreaseQualityIfRelevant(item);
+                }
+                item.SellIn--;
+            }
+
+            private  void IncreaseQualityIfRelevant(Item item)
+            {
+                if (item.Quality < 50)
+                {
+                    item.Quality = item.Quality + 1;
+                }
+            }
+        }
         public void UpdateQuality()
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                Item item = Items[i];
+                AgedBrieStrategy s1 = new AgedBrieStrategy();
+                if (s1.IsRelevantTo(item))
                 {
-                    if (Items[i].Quality > 0)
-                    {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
-                    }
+                    s1.UpdateQuality(item);
+                    continue;
+                }
+                bool notBrie = item.Name != "Aged Brie";
+                bool notBackStage = item.Name != "Backstage passes to a TAFKAL80ETC concert";
+                bool notRegnaros = item.Name != "Sulfuras, Hand of Ragnaros";
+                bool isStandardItem = notBrie && notBackStage;
+                if (isStandardItem && notRegnaros)
+                {
+                        DecraseQuality(item);
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    IncreaseQualityIfRelevant(item);
+
+                    if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                     {
-                        Items[i].Quality = Items[i].Quality + 1;
-
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].SellIn < 11)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-
-                            if (Items[i].SellIn < 6)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-                        }
+                        HandleBackstagePasses(item);
                     }
                 }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                if (notRegnaros)
                 {
-                    Items[i].SellIn = Items[i].SellIn - 1;
+                    item.SellIn = item.SellIn - 1;
                 }
 
-                if (Items[i].SellIn < 0)
+                if (item.SellIn < 0)
                 {
-                    if (Items[i].Name != "Aged Brie")
+                    if (!notBrie)
                     {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].Quality > 0)
-                            {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                                {
-                                    Items[i].Quality = Items[i].Quality - 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
-                        }
+                        HandleBrie(item);
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
+                        if (!notBackStage)
                         {
-                            Items[i].Quality = Items[i].Quality + 1;
+                            HandleBackstage(item);
+                        }
+                        else
+                        {
+                            if (notRegnaros)
+                            {
+                                DecraseQuality(item);
+                            }
                         }
                     }
                 }
             }
         }
 
+        private static void HandleBackstage(Item item)
+        {
+            SetNoQuality(item);
+        }
+
+        private static void HandleBrie(Item item)
+        {
+            IncreaseQualityIfRelevant(item);
+        }
+
+        private static void SetNoQuality(Item item)
+        {
+            item.Quality = item.Quality - item.Quality;
+        }
+
+        private static void HandleBackstagePasses(Item item)
+        {
+            if (item.SellIn < 11)
+            {
+                IncreaseQualityIfRelevant(item);
+            }
+
+            if (item.SellIn < 6)
+            {
+                IncreaseQualityIfRelevant(item);
+            }
+        }
+
+        private static void IncreaseQualityIfRelevant(Item item)
+        {
+            if (item.Quality < 50)
+            {
+                item.Quality = item.Quality + 1;
+            }
+        }
+
+        private static void DecraseQuality(Item item)
+        {
+            if (item.Quality > 0)
+            {
+                item.Quality = item.Quality - 1;
+            }
+        }
     }
-
-    public class Item
-    {
-        public string Name { get; set; }
-
-        public int SellIn { get; set; }
-
-        public int Quality { get; set; }
-    }
-
 }

@@ -42,6 +42,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GildedRoseAdjusterUpdateShould.cs" />
   </ItemGroup>

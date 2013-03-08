@@ -27,15 +27,26 @@ namespace GildedRose.Console
         }
 
         IList<Item> Items;
-        static void Main(string[] args)
+
+        public static void Main(string[] args)
         {
             System.Console.WriteLine("OMGHAI!");
 
             var app = GetInitialSetup();
             var adjuster = new GildedRoseQualityAdjuster(app.Items);
-            adjuster.UpdateQuality();
+            for (var i = 0; i < 31; i++)
+            {
+                System.Console.WriteLine("-------- day " + i + " --------");
+                System.Console.WriteLine("name, sellIn, quality");
+                for (var j = 0; j < app.Items.Count; j++)
+                {
+                    System.Console.WriteLine(app.Items[j].Name + ", " + app.Items[j].SellIn + ", " + app.Items[j].Quality);
+                }
+                System.Console.WriteLine("");
+                adjuster.UpdateQuality();
+            }
 
-            System.Console.ReadKey();
+            //System.Console.ReadKey();
         }
 
         public static List<Item> CurrentItems { get; set; }
