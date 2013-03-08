@@ -56,41 +56,19 @@ namespace GildedRose.Console
 
         }
 
-        class AgedBrieStrategy
-        {
-            public bool IsRelevantTo(Item item)
-            {
-                return item.Name.Contains("Brie");
-            }
-
-            public void UpdateQuality(Item item)
-            {
-                if (item.SellIn>0)
-                {
-                    IncreaseQualityIfRelevant(item);
-                }
-                item.SellIn--;
-            }
-
-            private  void IncreaseQualityIfRelevant(Item item)
-            {
-                if (item.Quality < 50)
-                {
-                    item.Quality = item.Quality + 1;
-                }
-            }
-        }
         public void UpdateQuality()
         {
             for (var i = 0; i < Items.Count; i++)
             {
                 Item item = Items[i];
-                AgedBrieStrategy s1 = new AgedBrieStrategy();
-                if (s1.IsRelevantTo(item))
+                QualityStrategyFinder finder = new QualityStrategyFinder();
+                IQualityStrategy strategy = finder.FindStrategy(item);
+                if (strategy!=null)
                 {
-                    s1.UpdateQuality(item);
+                    strategy.UpdateQuality(item);
                     continue;
                 }
+
                 bool notBrie = item.Name != "Aged Brie";
                 bool notBackStage = item.Name != "Backstage passes to a TAFKAL80ETC concert";
                 bool notRegnaros = item.Name != "Sulfuras, Hand of Ragnaros";
@@ -102,11 +80,6 @@ namespace GildedRose.Console
                 else
                 {
                     IncreaseQualityIfRelevant(item);
-
-                    if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                    {
-                        HandleBackstagePasses(item);
-                    }
                 }
 
                 if (notRegnaros)
@@ -116,23 +89,9 @@ namespace GildedRose.Console
 
                 if (item.SellIn < 0)
                 {
-                    if (!notBrie)
+                    if (notRegnaros)
                     {
-                        HandleBrie(item);
-                    }
-                    else
-                    {
-                        if (!notBackStage)
-                        {
-                            HandleBackstage(item);
-                        }
-                        else
-                        {
-                            if (notRegnaros)
-                            {
-                                DecraseQuality(item);
-                            }
-                        }
+                        DecraseQuality(item);
                     }
                 }
             }

@@ -44,9 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgedBrieStrategy.cs" />
+    <Compile Include="IQualityStrategy.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QualityStrategyFinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
